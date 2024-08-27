@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k8s-cronjob
+spec:
+  template:
+    spec:
+      containers:
+        - name: k8s-cronjob
+          image: k8s-cronjob:latest
+          imagePullPolicy: Never
+      restartPolicy: Never
+  backoffLimit: 0
+  

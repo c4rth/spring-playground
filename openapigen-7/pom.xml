@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>org.c4rth</groupId>
+    <artifactId>openapigen-7</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>openapigen-7</name>
+    <description>openapigen-7</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations-jakarta</artifactId>
+            <version>2.2.22</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+        <dependency><groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <compilerArgument>-parameters</compilerArgument>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.7.0</version>
+                <executions>
+                    <execution>
+                        <id>gen-server</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml?resolved=true
+                            </inputSpec>
+                            <generatorName>spring</generatorName> <!-- spring = server -->
+                            <configOptions>
+                                <apiPackage>org.c4rth.gen6.spring.petstore.api</apiPackage>
+                                <modelPackage>org.c4rth.gen6.spring.petstore.api.model</modelPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useJakartaEe>true</useJakartaEe>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                            </configOptions>
+                            <additionalProperties>
+                                <gradleBuildFile>false</gradleBuildFile>
+                                <gradleBuildFiles>false</gradleBuildFiles>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gen-client</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml?resolved=true
+                            </inputSpec>
+                            <generatorName>java</generatorName> <!-- java = client -->
+                            <configOptions>
+                                <apiPackage>org.c4rth.gen6.spring.petstore.client</apiPackage>
+                                <modelPackage>org.c4rth.gen6.spring.petstore.client.model</modelPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useJakartaEe>true</useJakartaEe>
+                                <library>restclient</library> <!-- webclient, resttemplate, restclient -->
+                                <apiDocs>false</apiDocs>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <modelDocs>false</modelDocs>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                            </configOptions>
+                            <additionalProperties>
+                                <gradleBuildFile>false</gradleBuildFile>
+                                <gradleBuildFiles>false</gradleBuildFiles>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
