@@ -44,6 +44,11 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -60,7 +65,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.7.0</version>
+                <version>7.8.0</version>
                 <executions>
                     <execution>
                         <id>gen-server</id>
@@ -73,8 +78,8 @@
                             </inputSpec>
                             <generatorName>spring</generatorName> <!-- spring = server -->
                             <configOptions>
-                                <apiPackage>org.c4rth.gen6.spring.petstore.api</apiPackage>
-                                <modelPackage>org.c4rth.gen6.spring.petstore.api.model</modelPackage>
+                                <apiPackage>org.c4rth.spring.petstore.api</apiPackage>
+                                <modelPackage>org.c4rth.spring.petstore.api.model</modelPackage>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useJakartaEe>true</useJakartaEe>
                                 <useSpringBoot3>true</useSpringBoot3>
@@ -97,15 +102,11 @@
                             </inputSpec>
                             <generatorName>java</generatorName> <!-- java = client -->
                             <configOptions>
-                                <apiPackage>org.c4rth.gen6.spring.petstore.client</apiPackage>
-                                <modelPackage>org.c4rth.gen6.spring.petstore.client.model</modelPackage>
+                                <apiPackage>org.c4rth.spring.petstore.client</apiPackage>
+                                <modelPackage>org.c4rth.spring.petstore.client.model</modelPackage>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useJakartaEe>true</useJakartaEe>
-                                <library>restclient</library> <!-- webclient, resttemplate, restclient -->
-                                <apiDocs>false</apiDocs>
-                                <useSpringBoot3>true</useSpringBoot3>
-                                <modelDocs>false</modelDocs>
-                                <generateSupportingFiles>false</generateSupportingFiles>
+                                <library>resttemplate</library> <!-- webclient, resttemplate, restclient -->
                             </configOptions>
                             <additionalProperties>
                                 <gradleBuildFile>false</gradleBuildFile>

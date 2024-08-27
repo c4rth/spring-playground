@@ -12,6 +12,7 @@
         <module>zalando-problem</module>
         <module>openapigen-7</module>
         <module>k8s-cronjob</module>
+        <module>resilience4j</module>
     </modules>
 
 </project>
