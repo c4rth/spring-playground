@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.c4rth</groupId>
-    <artifactId>openapigen-7</artifactId>
+    <artifactId>openapi-gen</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>openapigen-7</name>
     <description>openapigen-7</description>
@@ -65,9 +65,34 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.8.0</version>
+                <version>7.7.0</version>
                 <executions>
                     <execution>
+                        <id>demo-swagger</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                https://api.swaggerhub.com/apis/bonduell/petpetpet/1.0.0/swagger.yaml?resolved=true
+                            </inputSpec>
+                            <generatorName>spring</generatorName> <!-- spring = server -->
+                            <configOptions>
+                                <apiPackage>org.c4rth.spring.petstore.api</apiPackage>
+                                <modelPackage>org.c4rth.spring.petstore.api.model</modelPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useJakartaEe>true</useJakartaEe>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                            </configOptions>
+                            <additionalProperties>
+                                <gradleBuildFile>false</gradleBuildFile>
+                                <gradleBuildFiles>false</gradleBuildFiles>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+
+                    <!--<execution>
                         <id>gen-server</id>
                         <goals>
                             <goal>generate</goal>
@@ -76,7 +101,7 @@
                             <inputSpec>
                                 https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml?resolved=true
                             </inputSpec>
-                            <generatorName>spring</generatorName> <!-- spring = server -->
+                            <generatorName>spring</generatorName> &lt;!&ndash; spring = server &ndash;&gt;
                             <configOptions>
                                 <apiPackage>org.c4rth.spring.petstore.api</apiPackage>
                                 <modelPackage>org.c4rth.spring.petstore.api.model</modelPackage>
@@ -100,20 +125,20 @@
                             <inputSpec>
                                 https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml?resolved=true
                             </inputSpec>
-                            <generatorName>java</generatorName> <!-- java = client -->
+                            <generatorName>java</generatorName> &lt;!&ndash; java = client &ndash;&gt;
                             <configOptions>
                                 <apiPackage>org.c4rth.spring.petstore.client</apiPackage>
                                 <modelPackage>org.c4rth.spring.petstore.client.model</modelPackage>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useJakartaEe>true</useJakartaEe>
-                                <library>resttemplate</library> <!-- webclient, resttemplate, restclient -->
+                                <library>resttemplate</library> &lt;!&ndash; webclient, resttemplate, restclient &ndash;&gt;
                             </configOptions>
                             <additionalProperties>
                                 <gradleBuildFile>false</gradleBuildFile>
                                 <gradleBuildFiles>false</gradleBuildFiles>
                             </additionalProperties>
                         </configuration>
-                    </execution>
+                    </execution>-->
                 </executions>
             </plugin>
         </plugins>

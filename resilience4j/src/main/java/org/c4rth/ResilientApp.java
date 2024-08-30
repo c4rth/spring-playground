@@ -1,4 +1,4 @@
-package org.c4rth.resilience4j;
+package org.c4rth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

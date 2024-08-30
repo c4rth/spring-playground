@@ -1,8 +1,17 @@
+
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  endpoint.health.show-details: always
+  metrics:
+    tags.application: ${spring.application.name}
+    tags.group: 'c4rth'
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        resilience4j.circuitbreaker.calls: true
 
 resilience4j.circuitbreaker:
   configs:
@@ -15,8 +24,16 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 5s
       failureRateThreshold: 50
       eventConsumerBufferSize: 50
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      ignore-exceptions:
+        - org.c4rth.demoresilience4j.exception.BusinessException
   instances:
     externalService:
+      baseConfig: default
+    backendA:
       baseConfig: default
 
 resilience4j.retry:
@@ -24,8 +41,16 @@ resilience4j.retry:
     default:
       maxAttempts: 3
       waitDuration: 100
+      retry-exceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      ignore-exceptions:
+        - org.c4rth.demoresilience4j.exception.BusinessException
   instances:
     externalService:
+      baseConfig: default
+    backendA:
       baseConfig: default
 
 resilience4j.timelimiter:
@@ -36,6 +61,8 @@ resilience4j.timelimiter:
   instances:
     externalService:
       baseConfig: default
+    backendA:
+      baseConfig: default
 
 resilience4j.bulkhead:
   configs:
@@ -45,6 +72,8 @@ resilience4j.bulkhead:
   instances:
     externalService:
       baseConfig: default
+    backendA:
+      maxConcurrentCalls: 10
 
 resilience4j.ratelimiter:
   configs:
@@ -58,3 +87,14 @@ resilience4j.ratelimiter:
   instances:
     externalService:
       baseConfig: default
+    backendA:
+      baseConfig: default
+spring:
+  application:
+    name: resilience4j-demo
+
+info:
+  name: ${spring.application.name}
+  description: resilience4j demo
+  environment: ${spring.profiles.active}
+  version: 0.0.1

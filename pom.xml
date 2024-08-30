@@ -9,10 +9,13 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cloud-azure</module>
         <module>zalando-problem</module>
-        <module>openapigen-7</module>
+        <module>openapi-gen</module>
         <module>k8s-cronjob</module>
         <module>resilience4j</module>
+        <module>jwt</module>
+        <module>graphql</module>
     </modules>
 
 </project>

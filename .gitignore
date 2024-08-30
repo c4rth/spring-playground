@@ -11,3 +11,4 @@ target/
 /tools/
 /.idea/workspace.xml
 /.idea
+**/.env
