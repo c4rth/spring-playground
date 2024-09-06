@@ -1,0 +1,101 @@
+### Call without authentication
+GET http://localhost:8080/api/user
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 401, "Expected to receive HTTP/401 response status code");
+    })
+%}
+
+### ADMIN --------------------------------------------------------------------------------------------------------------
+### Authenticate John = admin
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "john",
+  "password": "password"
+}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+        client.global.set("accessToken", response.body.accessToken);
+    })
+%}
+
+### Call /admin WITH authentication
+GET http://localhost:8080/api/admin
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+    })
+%}
+
+### USER ---------------------------------------------------------------------------------------------------------------
+### Authenticate Paul = user
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "paul",
+  "password": "password"
+}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+        client.global.set("accessToken", response.body.accessToken);
+    })
+%}
+
+
+### Call /user WITH authentication
+GET http://localhost:8080/api/user
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+    })
+%}
+
+### ADMIN + USER -------------------------------------------------------------------------------------------------------
+### Authenticate Paul = user
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "mark",
+  "password": "password"
+}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+        client.global.set("accessToken", response.body.accessToken);
+    })
+%}
+
+
+### Call /user WITH authentication
+GET http://localhost:8080/api/user
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+    })
+%}
+
+### Call /admin WITH authentication
+GET http://localhost:8080/api/admin
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test("Response status code", function () {
+        client.assert(response.status == 200, "Expected to receive HTTP/200 response status code");
+    })
+%}
