@@ -1,0 +1,25 @@
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:mem:testdb;MODE=MSSQLServer
+    #url: jdbc:h2:file:./db/icrm;MODE=MSSQLServer;AUTO_SERVER=true
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database: h2
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    #database-platform: org.hibernate.dialect.H2Dialect
+    #database-platform: org.c4rth.jpah2.config.ExtendedSQLServerDialect
+    database-platform: org.c4rth.jpah2.config.ExtendedH2Dialect
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.c4rth.jpah2.config.ExtendedSQLServerDialect

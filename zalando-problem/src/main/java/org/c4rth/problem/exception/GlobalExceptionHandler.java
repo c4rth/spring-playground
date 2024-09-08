@@ -24,7 +24,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setProperty("subReturnCode", e.getSubReturnCode());
         problemDetail.setProperty("type", e.getExceptionType());
         problemDetail.setProperty("message", e.getMessage());
-        problemDetail.setProperty("traceid", correlationIDHandler.getTraceId());
+        problemDetail.setProperty("traceId", correlationIDHandler.getTraceId());
         List<String> errors = List.of("error1", "error2", "error3");
         problemDetail.setProperty("errors", errors);
         List<String> warnings = List.of("warning1", "warning2", "warning3");

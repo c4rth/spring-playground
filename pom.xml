@@ -16,6 +16,7 @@
         <module>resilience4j</module>
         <module>jwt</module>
         <module>graphql</module>
+        <module>jpa-h2</module>
     </modules>
 
 </project>
